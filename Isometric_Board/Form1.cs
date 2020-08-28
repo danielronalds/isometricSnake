@@ -54,8 +54,8 @@ namespace isometricSnake
             int rndNumX;
             int rndNumY;
 
-            rndNumX = random.Next(0, 11);
-            rndNumY = random.Next(0, 11);
+            rndNumX = random.Next(0, 10);
+            rndNumY = random.Next(0, 10);
 
             location = map[rndNumX, rndNumY];
 
