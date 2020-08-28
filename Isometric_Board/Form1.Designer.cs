@@ -45,7 +45,7 @@
             // refreshScreen
             // 
             this.refreshScreen.Enabled = true;
-            this.refreshScreen.Interval = 1;
+            this.refreshScreen.Interval = 80;
             this.refreshScreen.Tick += new System.EventHandler(this.refreshScreen_Tick);
             // 
             // Form1

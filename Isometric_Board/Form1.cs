@@ -21,13 +21,21 @@ namespace isometricSnake
 
         Random random = new Random();
 
+        bool gameRunning = false;
+
+        Snake snake;
+
         Apple apple;
 
         public Form1()
         {
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, Canvas, new object[] { true });
-            apple = new Apple(randomLocation());        
+            apple = new Apple(randomLocation());
+
+            Point[,] map = renderer.grid.Layers[1];
+
+            snake = new Snake(map[5,5]);
         }
 
 
@@ -38,6 +46,13 @@ namespace isometricSnake
             renderer.Render(g);
 
             apple.drawApple(g);
+
+            if(gameRunning)
+            {
+                snake.moveSnake(snakeUp, snakeDown, snakeLeft, snakeRight);
+            }
+
+            snake.drawSnake(g);
         }
 
         private void refreshScreen_Tick(object sender, EventArgs e)
@@ -67,43 +82,45 @@ namespace isometricSnake
             switch (e.KeyCode)
             {
                 case Keys.D:
+                case Keys.Right:
                     snakeRight = true;
+                    snakeLeft = false;
+                    snakeUp = false;
+                    snakeDown = false;
                     break;
 
                 case Keys.A:
+                case Keys.Left:
+                    snakeRight = false;
                     snakeLeft = true;
+                    snakeUp = false;
+                    snakeDown = false;
                     break;
 
                 case Keys.W:
+                case Keys.Up:
+                    snakeRight = false;
+                    snakeLeft = false;
                     snakeUp = true;
+                    snakeDown = false;
                     break;
 
                 case Keys.S:
+                case Keys.Down:
+                    snakeRight = false;
+                    snakeLeft = false;
+                    snakeUp = false;
                     snakeDown = true;
                     break;
+            }
+            if(!gameRunning)
+            {
+                gameRunning = true;
             }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
-            {
-                case Keys.D:
-                    snakeRight = false;
-                    break;
-
-                case Keys.A:
-                    snakeLeft = false;
-                    break;
-
-                case Keys.W:
-                    snakeUp = false;
-                    break;
-
-                case Keys.S:
-                    snakeDown = false;
-                    break;
-            }
         }
     }
 }
