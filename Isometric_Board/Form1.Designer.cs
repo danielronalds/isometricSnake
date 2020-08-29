@@ -31,11 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.Canvas = new System.Windows.Forms.Panel();
             this.refreshScreen = new System.Windows.Forms.Timer(this.components);
+            this.scoreLbl = new System.Windows.Forms.Label();
+            this.Canvas.SuspendLayout();
             this.SuspendLayout();
             // 
             // Canvas
             // 
             this.Canvas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
+            this.Canvas.Controls.Add(this.scoreLbl);
             this.Canvas.Location = new System.Drawing.Point(0, 0);
             this.Canvas.Name = "Canvas";
             this.Canvas.Size = new System.Drawing.Size(840, 600);
@@ -48,6 +51,17 @@
             this.refreshScreen.Interval = 80;
             this.refreshScreen.Tick += new System.EventHandler(this.refreshScreen_Tick);
             // 
+            // scoreLbl
+            // 
+            this.scoreLbl.AutoSize = true;
+            this.scoreLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreLbl.ForeColor = System.Drawing.Color.White;
+            this.scoreLbl.Location = new System.Drawing.Point(12, 9);
+            this.scoreLbl.Name = "scoreLbl";
+            this.scoreLbl.Size = new System.Drawing.Size(26, 28);
+            this.scoreLbl.TabIndex = 1;
+            this.scoreLbl.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -59,6 +73,8 @@
             this.Text = "Isometric Snake";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.Canvas.ResumeLayout(false);
+            this.Canvas.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -67,6 +83,7 @@
 
         private System.Windows.Forms.Panel Canvas;
         private System.Windows.Forms.Timer refreshScreen;
+        private System.Windows.Forms.Label scoreLbl;
     }
 }
 

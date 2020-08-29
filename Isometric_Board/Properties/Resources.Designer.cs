@@ -103,6 +103,35 @@ namespace isometricSnake.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap isometric_apple_no_shadow {
+            get {
+                object obj = ResourceManager.GetObject("isometric_apple_no_shadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap isometric_apple_shadow {
+            get {
+                object obj = ResourceManager.GetObject("isometric_apple_shadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Pickup_Apple {
+            get {
+                return ResourceManager.GetStream("Pickup_Apple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap snake_2 {
             get {
                 object obj = ResourceManager.GetObject("snake_2", resourceCulture);

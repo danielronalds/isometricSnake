@@ -12,9 +12,15 @@ namespace isometricSnake
         Size appleSize;
         Point appleLocation;
 
-        public Rectangle appleRec;
+        Rectangle appleRec;
+
+        public Rectangle appleShadowRec;
 
         Image appleImage;
+
+        Image appleShadow;
+
+        int animationCurrentCycle, animationMaxCycle = 8;
 
         public Apple(Point Spawn)
         {
@@ -24,12 +30,35 @@ namespace isometricSnake
 
             appleRec = new Rectangle(appleLocation, appleSize);
 
-            appleImage = Properties.Resources.isometric_apple;
+            appleShadowRec = appleRec;
+
+            appleImage = Properties.Resources.isometric_apple_no_shadow;
+
+            appleShadow = Properties.Resources.isometric_apple_shadow;
         }
 
         public void drawApple(Graphics g)
         {
+            updateAnimation();
+
+            g.DrawImage(appleShadow, appleShadowRec);
             g.DrawImage(appleImage, appleRec);
+        }
+
+        public void updateAnimation()
+        {
+            if(animationCurrentCycle < animationMaxCycle/2)
+            {
+                animationCurrentCycle++;
+                appleRec.Y++;
+            } else if(animationCurrentCycle < animationMaxCycle)
+            { 
+                animationCurrentCycle++;
+                appleRec.Y--;
+            } else
+            {
+                animationCurrentCycle = 0;
+            }
         }
     }
 }

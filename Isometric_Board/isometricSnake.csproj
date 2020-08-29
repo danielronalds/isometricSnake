@@ -62,6 +62,7 @@
     <Compile Include="Renderer_v2.cs" />
     <Compile Include="Snake.cs" />
     <Compile Include="snakeSegment.cs" />
+    <Compile Include="SoundManager.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +124,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\snake_head.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\isometric_apple_no_shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\isometric_apple_shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pickup_Coin.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,6 +15,8 @@ namespace isometricSnake
     {
         Graphics g;
 
+        SoundManager sound = new SoundManager();
+
         Renderer_v2 renderer = new Renderer_v2();
 
         List<snakeSegment> renderOrder = new List<snakeSegment>();
@@ -27,7 +29,7 @@ namespace isometricSnake
         
         Snake snake;
 
-        Apple apple;
+        List<Apple> apples = new List<Apple>();
 
         int score;
 
@@ -42,7 +44,7 @@ namespace isometricSnake
             
             map = renderer.grid.Layers[1];
 
-            apple = new Apple(map[9, 3]);
+            apples.Add(new Apple(map[9, 6]));
 
             snake = new Snake(map[9,9]);
         }
@@ -65,7 +67,10 @@ namespace isometricSnake
 
             renderer.Render(g);
 
-            apple.drawApple(g);
+            foreach (Apple apple in apples)
+            {
+                apple.drawApple(g);
+            }
 
             foreach (snakeSegment tailUnit in renderOrder)
             {
@@ -116,16 +121,21 @@ namespace isometricSnake
 
         private void checkCollisions()
         {
-            if(apple.appleRec.Location == snake.tail[0].snakeRec.Location) // Checks if the snake has eaten an apple
+            if(apples[0].appleShadowRec.Location == snake.tail[0].snakeRec.Location) // Checks if the snake has eaten an apple
             {
                 score++;
                 snake.TailLength++;
 
+                scoreLbl.Text = "" + score;
+
+                sound.Pickup_Apple();
+
                 foreach (snakeSegment tailUnit in snake.tail)
                 {
-                    while (apple.appleRec.Location == tailUnit.snakeRec.Location)
+                    while (apples[0].appleShadowRec.Location == tailUnit.snakeRec.Location) // Using appleShadowRec as it doesnt get moved during the animation
                     {
-                        apple.appleRec.Location = randomLocation();
+                        apples.Clear();
+                        apples.Add(new Apple(randomLocation()));
                     }
                 }
 
