@@ -42,9 +42,9 @@ namespace isometricSnake
             
             map = renderer.grid.Layers[1];
 
-            apple = new Apple(map[5, 1]);
+            apple = new Apple(map[9, 3]);
 
-            snake = new Snake(map[5,5]);
+            snake = new Snake(map[9,9]);
         }
 
 
@@ -71,8 +71,6 @@ namespace isometricSnake
             {
                 tailUnit.drawSnake(g);
             }
-
-            //snake.drawSnake(g);
         }
 
         private void refreshScreen_Tick(object sender, EventArgs e)
@@ -118,14 +116,14 @@ namespace isometricSnake
 
         private void checkCollisions()
         {
-            if(apple.appleRec.Location == snake.tail[0].snakeRec.Location)
+            if(apple.appleRec.Location == snake.tail[0].snakeRec.Location) // Checks if the snake has eaten an apple
             {
                 score++;
                 snake.TailLength++;
 
-                foreach (snakeSegment tail in snake.tail)
+                foreach (snakeSegment tailUnit in snake.tail)
                 {
-                    while (apple.appleRec.Location == tail.snakeRec.Location)
+                    while (apple.appleRec.Location == tailUnit.snakeRec.Location)
                     {
                         apple.appleRec.Location = randomLocation();
                     }
@@ -134,10 +132,11 @@ namespace isometricSnake
                 Console.WriteLine("Score: " + score);
             }
 
-            if (outOfBounds())
+            if (outOfBounds() || snakeOverlapping()) // Checks to see if the snake went off the map or ran into itself
             {
                 gameState = 2;
             }
+
         }
 
         private bool outOfBounds()
@@ -153,6 +152,24 @@ namespace isometricSnake
                 }
             }
             return true;
+        }
+
+        private bool snakeOverlapping()
+        {
+            for (int i = 0; i < snake.tail.Count() - 1; i++)
+            {
+                int x = i + 1;
+
+                Point snakeHead = snake.tail[0].snakeRec.Location;
+
+                Point snakeSegment = snake.tail[x].snakeRec.Location;
+
+                if(snakeHead == snakeSegment)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

@@ -9,10 +9,10 @@ namespace isometricSnake
 {
     class Grid_v2
     {
-        int x_offset = 376;
-        int y_offset = 150;
+        int x_offset = 396;
+        int y_offset = 130;
 
-        public int gridSize = 11;
+        public int gridSize = 17;
         public int gridSizeZ = 2;
 
         public List<Point[,]> Layers = new List<Point[,]>();
