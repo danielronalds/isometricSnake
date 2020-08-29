@@ -13,7 +13,9 @@ namespace isometricSnake
 
         public Rectangle snakeRec;
 
-        public string previousDirection;
+        public string previousDirection; 
+        
+        public string Direction;
 
         Image snakeImage;
 
@@ -25,22 +27,20 @@ namespace isometricSnake
 
         public void drawSnake(Graphics g, Point Location, string direction)
         {
+            previousPoint = snakeRec.Location;
+
+            previousDirection = Direction;
+
             snakeRec.Location = Location;
 
-            previousPoint = Location;
+            Direction = direction;
 
-            previousDirection = direction;
-
-            switch (direction)
+            switch (Direction)
             {
                 case "left":
-                    snakeRec.X -= 22;
-                    snakeRec.Y += 11;
                     snakeImage = Properties.Resources.snake_2;
                     break;
                 case "down":
-                    snakeRec.X += 22;
-                    snakeRec.Y += 11;
                     snakeImage = Properties.Resources.snake_3;
                     break;
                 default:

@@ -17,7 +17,7 @@ namespace isometricSnake
 
         String direction;
 
-        int TailLength = 5;
+        public int TailLength = 0;
 
         String previousDirection;
 
@@ -34,18 +34,15 @@ namespace isometricSnake
         public void drawSnake(Graphics g)
         {
             g.DrawImage(snakeImage, snakeRec);
+
             for (int i = 0; i < tail.Count(); i++)
             {
                 if(i == 0)
                 {
                     tail[i].drawSnake(g, previousPoint, previousDirection);
-                }
-                else
+                } else
                 {
-                    Point Location = tail[i - 1].previousPoint;
-                    string Direction = tail[i - 1].previousDirection;
-
-                    tail[i].drawSnake(g, Location, Direction);
+                    tail[i].drawSnake(g, tail[i - 1].previousPoint, tail[i - 1].previousDirection);
                 }
             }
         }
@@ -84,32 +81,10 @@ namespace isometricSnake
                 direction = "right";
             }
 
-
-            if (tail.Count() < TailLength)
+            if(tail.Count() < TailLength)
             {
-                Point spawnLocation = previousPoint;
-
-                if(snakeLeft)
-                {
-                    spawnLocation.X -= 22;
-                    spawnLocation.Y += 11;
-                } else if (snakeRight)
-                {
-                    spawnLocation.X += 22;
-                    spawnLocation.Y -= 11;
-                } else if (snakeUp)
-                {
-                    spawnLocation.X -= 22;
-                    spawnLocation.Y -= 11;
-                } else if(snakeDown)
-                {
-                    spawnLocation.X += 22;
-                    spawnLocation.Y += 11;
-                }
-
-                tail.Add(new snakeSegment(spawnLocation));
+                tail.Add(new snakeSegment(previousPoint));
             }
         }
-
     }
 }

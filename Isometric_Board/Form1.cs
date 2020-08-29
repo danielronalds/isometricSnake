@@ -21,11 +21,15 @@ namespace isometricSnake
 
         Random random = new Random();
 
-        bool gameRunning = false;
-
+        int gameState = 0;
+        
         Snake snake;
 
         Apple apple;
+
+        int score;
+
+        Point[,] map;
 
         public Form1()
         {
@@ -33,7 +37,7 @@ namespace isometricSnake
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, Canvas, new object[] { true });
             apple = new Apple(randomLocation());
 
-            Point[,] map = renderer.grid.Layers[1];
+            map = renderer.grid.Layers[1];
 
             snake = new Snake(map[5,5]);
         }
@@ -43,14 +47,16 @@ namespace isometricSnake
         {
             g = e.Graphics;
 
-            renderer.Render(g);
-
-            apple.drawApple(g);
-
-            if(gameRunning)
+            if(gameState == 1)
             {
                 snake.moveSnake(snakeUp, snakeDown, snakeLeft, snakeRight);
             }
+
+            checkCollisions();
+
+            renderer.Render(g);
+
+            apple.drawApple(g);
 
             snake.drawSnake(g);
         }
@@ -77,45 +83,91 @@ namespace isometricSnake
             return location;
         }
 
+        private void checkCollisions()
+        {
+            if(apple.appleRec.Location == snake.snakeRec.Location)
+            {
+                score++;
+                snake.TailLength++;
+                while (apple.appleRec.Location == snake.snakeRec.Location)
+                {
+                    apple.appleRec.Location = randomLocation();
+                }
+                Console.WriteLine("Score: " + score);
+            }
+
+            if (outOfBounds())
+            {
+                gameState = 2;
+            }
+        }
+
+        private bool outOfBounds()
+        {
+            for (int i = 0; i < renderer.grid.gridSize; i++)
+            {
+                for (int x = 0; x < renderer.grid.gridSize; x++)
+                {
+                    if(map[i, x] == snake.snakeRec.Location)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.D:
                 case Keys.Right:
-                    snakeRight = true;
-                    snakeLeft = false;
-                    snakeUp = false;
-                    snakeDown = false;
+                    if(!snakeLeft) // Prevents the snake from going through itself
+                    {
+                        snakeRight = true;
+                        snakeLeft = false;
+                        snakeUp = false;
+                        snakeDown = false;
+                    }
                     break;
 
                 case Keys.A:
                 case Keys.Left:
-                    snakeRight = false;
-                    snakeLeft = true;
-                    snakeUp = false;
-                    snakeDown = false;
+                    if(!snakeRight) // Prevents the snake from going through itself
+                    {
+                        snakeRight = false;
+                        snakeLeft = true;
+                        snakeUp = false;
+                        snakeDown = false;
+                    }
                     break;
 
                 case Keys.W:
                 case Keys.Up:
-                    snakeRight = false;
-                    snakeLeft = false;
-                    snakeUp = true;
-                    snakeDown = false;
+                    if(!snakeDown) // Prevents the snake from going through itself
+                    {
+                        snakeRight = false;
+                        snakeLeft = false;
+                        snakeUp = true;
+                        snakeDown = false;
+                    }
                     break;
 
                 case Keys.S:
                 case Keys.Down:
-                    snakeRight = false;
-                    snakeLeft = false;
-                    snakeUp = false;
-                    snakeDown = true;
+                    if(!snakeUp) // Prevents the snake from going through itself
+                    {
+                        snakeRight = false;
+                        snakeLeft = false;
+                        snakeUp = false;
+                        snakeDown = true;
+                    }
                     break;
             }
-            if(!gameRunning)
+            if(gameState < 1)
             {
-                gameRunning = true;
+                gameState = 1;
             }
         }
 
