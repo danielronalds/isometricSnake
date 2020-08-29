@@ -15,23 +15,18 @@ namespace isometricSnake
 
         Point previousPoint;
 
+        String direction;
+
+        int TailLength = 5;
+
+        String previousDirection;
+
         Image snakeImage;
 
         public Snake(Point Location)
         {
             snakeRec = new Rectangle(Location, new Size(48, 48));
-            snakeImage = Properties.Resources.high_res_player_cube;
-
-            Point previousSpawn = Location;
-
-            for (int i = 0; i < 5; i++)
-            {
-                Point spawn = new Point(previousSpawn.X + (22 * (i+ 1)), previousSpawn.Y + (11 * (i + 1)));
-
-                tail.Add(new snakeSegment(spawn));
-
-                //previousSpawn = spawn;
-            }
+            snakeImage = Properties.Resources.snake_head;
 
             Console.WriteLine("Tail count: " + tail.Count());
         }
@@ -43,11 +38,14 @@ namespace isometricSnake
             {
                 if(i == 0)
                 {
-                    tail[i].drawSnake(g, previousPoint);
+                    tail[i].drawSnake(g, previousPoint, previousDirection);
                 }
                 else
                 {
-                    tail[i].drawSnake(g, tail[i - 1].previousPoint);
+                    Point Location = tail[i - 1].previousPoint;
+                    string Direction = tail[i - 1].previousDirection;
+
+                    tail[i].drawSnake(g, Location, Direction);
                 }
             }
         }
@@ -55,26 +53,61 @@ namespace isometricSnake
         public void moveSnake(bool snakeUp, bool snakeDown, bool snakeLeft, bool snakeRight)
         {
             previousPoint = snakeRec.Location;
+            previousDirection = direction;
 
             if (snakeUp)
             {
                 snakeRec.X -= 22;
                 snakeRec.Y -= 11;
+
+                direction = "up";
             }
             else if(snakeDown)
             {
                 snakeRec.X += 22;
                 snakeRec.Y += 11;
+
+                direction = "down";
             }
             else if(snakeLeft)
             {
                 snakeRec.X -= 22;
                 snakeRec.Y += 11;
+
+                direction = "left";
             }
             else if(snakeRight)
             {
                 snakeRec.X += 22;
                 snakeRec.Y -= 11;
+
+                direction = "right";
+            }
+
+
+            if (tail.Count() < TailLength)
+            {
+                Point spawnLocation = previousPoint;
+
+                if(snakeLeft)
+                {
+                    spawnLocation.X -= 22;
+                    spawnLocation.Y += 11;
+                } else if (snakeRight)
+                {
+                    spawnLocation.X += 22;
+                    spawnLocation.Y -= 11;
+                } else if (snakeUp)
+                {
+                    spawnLocation.X -= 22;
+                    spawnLocation.Y -= 11;
+                } else if(snakeDown)
+                {
+                    spawnLocation.X += 22;
+                    spawnLocation.Y += 11;
+                }
+
+                tail.Add(new snakeSegment(spawnLocation));
             }
         }
 

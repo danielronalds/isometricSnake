@@ -130,4 +130,16 @@
   <data name="isometric_apple" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\isometric_apple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="snake_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\snake_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="snake_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\snake_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="snake_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\snake_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="snake_head" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\snake_head.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
