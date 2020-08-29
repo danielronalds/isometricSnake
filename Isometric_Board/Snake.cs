@@ -17,7 +17,7 @@ namespace isometricSnake
 
         String direction;
 
-        public int TailLength = 0;
+        public int TailLength = 3;
 
         String previousDirection;
 
@@ -25,65 +25,81 @@ namespace isometricSnake
 
         public Snake(Point Location)
         {
-            snakeRec = new Rectangle(Location, new Size(48, 48));
-            snakeImage = Properties.Resources.snake_head;
+            //snakeRec = new Rectangle(Location, new Size(48, 48));
+            //snakeImage = Properties.Resources.snake_head;
 
-            Console.WriteLine("Tail count: " + tail.Count());
+            tail.Add(new snakeSegment(Location));
+
+            Console.WriteLine("Tail Length: " + tail.Count());
         }
 
         public void drawSnake(Graphics g)
         {
             g.DrawImage(snakeImage, snakeRec);
 
-            for (int i = 0; i < tail.Count(); i++)
-            {
-                if(i == 0)
-                {
-                    tail[i].drawSnake(g, previousPoint, previousDirection);
-                } else
-                {
-                    tail[i].drawSnake(g, tail[i - 1].previousPoint, tail[i - 1].previousDirection);
-                }
-            }
+            //foreach (snakeSegment segment in tail)
+            //{
+            //    segment.drawSnake(g);
+            //}
         }
 
         public void moveSnake(bool snakeUp, bool snakeDown, bool snakeLeft, bool snakeRight)
         {
-            previousPoint = snakeRec.Location;
+            tail[0].previousPoint = tail[0].snakeRec.Location;
             previousDirection = direction;
 
             if (snakeUp)
             {
-                snakeRec.X -= 22;
-                snakeRec.Y -= 11;
+                tail[0].snakeRec.X -= 22;
+                tail[0].snakeRec.Y -= 11;
 
-                direction = "up";
+                //tail[0].direction = "up";
             }
             else if(snakeDown)
             {
-                snakeRec.X += 22;
-                snakeRec.Y += 11;
+                tail[0].snakeRec.X += 22;
+                tail[0].snakeRec.Y += 11;
 
-                direction = "down";
+                //direction = "down";
             }
             else if(snakeLeft)
             {
-                snakeRec.X -= 22;
-                snakeRec.Y += 11;
+                tail[0].snakeRec.X -= 22;
+                tail[0].snakeRec.Y += 11;
 
-                direction = "left";
+                //direction = "left";
             }
             else if(snakeRight)
             {
-                snakeRec.X += 22;
-                snakeRec.Y -= 11;
+                tail[0].snakeRec.X += 22;
+                tail[0].snakeRec.Y -= 11;
 
-                direction = "right";
+                //direction = "right";
             }
 
             if(tail.Count() < TailLength)
             {
-                tail.Add(new snakeSegment(previousPoint));
+                tail.Add(new snakeSegment(tail[0].previousPoint));
+                Console.WriteLine("Tail length: " + tail.Count());
+            }
+
+            //for (int i = 0; i < tail.Count(); i++)
+            //{
+            //    if (i == 0)
+            //    {
+            //        tail[i].moveSnake(previousPoint, previousDirection, i, tail);
+            //    }
+            //    else
+            //    {
+            //        tail[i].moveSnake(tail[i - 1].previousPoint, tail[i - 1].previousDirection, i, tail);
+            //    }
+            //}
+
+            for (int i = 0; i < tail.Count()-1; i++)
+            {
+                int x = i + 1;
+
+                tail[x].moveSnake(tail[i].previousPoint);
             }
         }
     }
