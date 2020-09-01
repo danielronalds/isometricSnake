@@ -63,16 +63,6 @@ namespace isometricSnake.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap high_res_bottom_collider {
-            get {
-                object obj = ResourceManager.GetObject("high_res_bottom_collider", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap high_res_isometric_cube_white {
             get {
                 object obj = ResourceManager.GetObject("high_res_isometric_cube_white", resourceCulture);
@@ -83,19 +73,9 @@ namespace isometricSnake.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap high_res_player_cube {
+        internal static System.Drawing.Bitmap high_res_isometric_cube_white_bordered {
             get {
-                object obj = ResourceManager.GetObject("high_res_player_cube", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap isometric_apple {
-            get {
-                object obj = ResourceManager.GetObject("isometric_apple", resourceCulture);
+                object obj = ResourceManager.GetObject("high_res_isometric_cube_white_bordered", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,36 +106,6 @@ namespace isometricSnake.Properties {
         internal static System.IO.UnmanagedMemoryStream Pickup_Apple {
             get {
                 return ResourceManager.GetStream("Pickup_Apple", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap snake_2 {
-            get {
-                object obj = ResourceManager.GetObject("snake_2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap snake_3 {
-            get {
-                object obj = ResourceManager.GetObject("snake_3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap snake_4 {
-            get {
-                object obj = ResourceManager.GetObject("snake_4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

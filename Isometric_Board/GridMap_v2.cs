@@ -12,9 +12,11 @@ namespace isometricSnake
 
         public GridMap_v2()
         {
-            Layers.Add(layer1);
+            Layers.Add(layer1); // Loads the layer maps into one list for easy access 
             Layers.Add(layer2);
         }
+
+        // a "v" character tells the rendered to place a isomtric tile, a "0" tells it to leave it blank
 
         public string[,] layer1 = {
             { "v", "v", "v", "v", "v", "v", "v", "v", "v", "v", "v","v","v","v","v","v","v"} ,

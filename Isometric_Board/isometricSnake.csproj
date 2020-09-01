@@ -55,7 +55,6 @@
     </Compile>
     <Compile Include="GridMap_v2.cs" />
     <Compile Include="Grid_v2.cs" />
-    <Compile Include="IsometricCollider.cs" />
     <Compile Include="IsometricTile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Pickup_Coin.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\high_res_isometric_cube_white_bordered.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

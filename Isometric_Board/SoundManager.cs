@@ -7,7 +7,7 @@ using System.Media;
 
 namespace isometricSnake
 {
-    class SoundManager
+    class SoundManager // Class for sounds effects, makes it easier to manager
     {
         SoundPlayer apple = new SoundPlayer(Properties.Resources.Pickup_Apple);
 

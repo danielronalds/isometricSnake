@@ -44,9 +44,9 @@ namespace isometricSnake
             
             map = renderer.grid.Layers[1];
 
-            apples.Add(new Apple(map[9, 6]));
+            apples.Add(new Apple(map[8, 5]));
 
-            snake = new Snake(map[9,9]);
+            snake = new Snake(map[8,8]);
         }
 
 
@@ -59,6 +59,9 @@ namespace isometricSnake
             if(gameState == 1)
             {
                 snake.moveSnake(snakeUp, snakeDown, snakeLeft, snakeRight);
+            } else if(gameState == 2)
+            {
+                restartGame();
             }
 
             sortRenderOrder();
@@ -83,7 +86,29 @@ namespace isometricSnake
             Canvas.Invalidate();
         }
 
-        private void sortRenderOrder()
+        private void restartGame()
+        {
+            gameState = 0;
+
+            apples.Clear();
+
+            apples.Add(new Apple(map[8, 5]));
+
+            snake = new Snake(map[8, 8]);
+
+            score = 0;
+
+            scoreLbl.Text = "" + score;
+
+            framePassed = false;
+
+            snakeLeft = false;
+            snakeRight = false;
+            snakeUp = false;
+            snakeDown = false;
+        }
+
+        private void sortRenderOrder() // Figures out what order to pain the snake in
         {
             renderOrder.Clear();
 
@@ -102,7 +127,7 @@ namespace isometricSnake
             }
         }
 
-        private Point randomLocation()
+        private Point randomLocation() // Generates a random location for the apple to spawn
         {
             Point[,] map = renderer.grid.Layers[1];
 
@@ -124,7 +149,7 @@ namespace isometricSnake
             if(apples[0].appleShadowRec.Location == snake.tail[0].snakeRec.Location) // Checks if the snake has eaten an apple
             {
                 score++;
-                snake.TailLength++;
+                snake.TailLength++; // Updates score
 
                 scoreLbl.Text = "" + score;
 
@@ -132,8 +157,8 @@ namespace isometricSnake
 
                 foreach (snakeSegment tailUnit in snake.tail)
                 {
-                    while (apples[0].appleShadowRec.Location == tailUnit.snakeRec.Location) // Using appleShadowRec as it doesnt get moved during the animation
-                    {
+                    while (apples[0].appleShadowRec.Location == tailUnit.snakeRec.Location) // Makes sure the apple doesnt spawn in the snake
+                    {                                                                       // Using appleShadowRec as it doesnt get moved during the animation
                         apples.Clear();
                         apples.Add(new Apple(randomLocation()));
                     }
@@ -149,7 +174,7 @@ namespace isometricSnake
 
         }
 
-        private bool outOfBounds()
+        private bool outOfBounds() // Checks to see if the snake is out of the map
         {
             for (int i = 0; i < renderer.grid.gridSize; i++)
             {
@@ -164,7 +189,7 @@ namespace isometricSnake
             return true;
         }
 
-        private bool snakeOverlapping()
+        private bool snakeOverlapping() // Sees if the snake has eaten itself
         {
             for (int i = 0; i < snake.tail.Count() - 1; i++)
             {
@@ -180,7 +205,7 @@ namespace isometricSnake
                 }
             }
             return false;
-        }
+        } 
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -240,10 +265,6 @@ namespace isometricSnake
             {
                 gameState = 1;
             }
-        }
-
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
         }
     }
 }

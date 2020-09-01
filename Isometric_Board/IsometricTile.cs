@@ -13,15 +13,11 @@ namespace isometricSnake
 
         Image tileImage;
 
-        public IsometricCollider collider;
-
         public Rectangle tileRec;
-
-        public bool playerLayer;
 
         public string tileID;
 
-        public IsometricTile(Point Position, string ID, bool PlayerLayer)
+        public IsometricTile(Point Position, string ID)
         {
             x = Position.X;
             y = Position.Y;
@@ -33,19 +29,11 @@ namespace isometricSnake
             tileImage = Properties.Resources.high_res_isometric_cube_white;
 
             tileRec = new Rectangle(x, y, width, height);
-
-            if(PlayerLayer)
-            {
-                collider = new IsometricCollider(tileRec.Location);
-            }
-
-            playerLayer = PlayerLayer;
         }
 
         public void drawTile(Graphics g)
         {
             g.DrawImage(tileImage, tileRec);
-            //g.DrawRectangle(Pens.Green, tileRec);
         }
     }
 }

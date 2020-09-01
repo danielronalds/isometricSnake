@@ -9,6 +9,8 @@ namespace isometricSnake
 {
     class Grid_v2
     {
+        // Generates the points to place the tiles on
+
         int x_offset = 396;
         int y_offset = 130;
 
@@ -16,8 +18,6 @@ namespace isometricSnake
         public int gridSizeZ = 2;
 
         public List<Point[,]> Layers = new List<Point[,]>();
-
-        //public Point[,] Layer;
 
         public Grid_v2()
         {
@@ -44,7 +44,7 @@ namespace isometricSnake
             {
                 for (int x = 0; x < gridSize; x++)
                 {
-                    Point previousTile;//= new Point(0,0);
+                    Point previousTile;
 
                     if (i == 0)
                     {

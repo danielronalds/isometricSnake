@@ -28,23 +28,23 @@ namespace isometricSnake
             }
         }
 
-        private void loadIsometricTiles()
+        private void loadIsometricTiles() // Intepretes the grid map to add in isometric tiles in the correct location to draw into the game
         {
             string ID;
             int layerNumber = -1;
 
-            foreach (Point[,] layer in grid.Layers)
+            foreach (Point[,] layer in grid.Layers) 
             {
                 layerNumber++;
-                for (int i = 0; i < grid.gridSize; i++)
+                for (int i = 0; i < grid.gridSize; i++) // Goes throught the 2d arrays and inteprets each layer
                 {
                     for (int x = 0; x < grid.gridSize; x++)
                     {
                         string[,] map = gridMap.Layers[layerNumber];
                         if(map[x, i] != "0")
                         {
-                            ID = layerNumber + "-" + "-" + i + "-" + x;
-                            tiles.Add(new IsometricTile(layer[x, i], ID, false));
+                            ID = layerNumber + "-" + i + "-" + x;
+                            tiles.Add(new IsometricTile(layer[x, i], ID));
                         }
                     }
                 }

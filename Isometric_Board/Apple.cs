@@ -12,15 +12,15 @@ namespace isometricSnake
         Size appleSize;
         Point appleLocation;
 
-        Rectangle appleRec;
+        Rectangle appleRec; // rectangle for the apple sprite
 
-        public Rectangle appleShadowRec;
+        public Rectangle appleShadowRec; // rectange to paint the shadow with, and for collision tracking
 
         Image appleImage;
 
         Image appleShadow;
 
-        int animationCurrentCycle, animationMaxCycle = 8;
+        int animationCurrentCycle, animationMaxCycle = 8; // Keeps track of the animation frame
 
         public Apple(Point Spawn)
         {
@@ -45,7 +45,7 @@ namespace isometricSnake
             g.DrawImage(appleImage, appleRec);
         }
 
-        public void updateAnimation()
+        public void updateAnimation() // Creates the floating animation of the apple
         {
             if(animationCurrentCycle < animationMaxCycle/2)
             {

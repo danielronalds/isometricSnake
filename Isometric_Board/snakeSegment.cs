@@ -23,7 +23,7 @@ namespace isometricSnake
 
         public void moveSnake(Point Location)
         {
-            previousPoint = snakeRec.Location;
+            previousPoint = snakeRec.Location; // Saves the previous location of the tail segment for the tail segment behind it to move to
 
             snakeRec.Location = Location;
         }
