@@ -47,6 +47,8 @@ namespace isometricSnake
                 tail[0].snakeRec.Y -= 11;
             }
 
+            tail[0].renderer.RenderRect = tail[0].snakeRec;
+
             if(tail.Count() < TailLength) // Checks to see if the tail is as long as it should be, and if not adds a snake segement
             {
                 tail.Add(new snakeSegment(tail[0].previousPoint));

@@ -32,6 +32,7 @@ namespace isometricSnake
         List<Apple> apples = new List<Apple>();
 
         int score;
+        int highScore = 0;
 
         bool framePassed = false;
 
@@ -61,6 +62,13 @@ namespace isometricSnake
                 snake.moveSnake(snakeUp, snakeDown, snakeLeft, snakeRight);
             } else if(gameState == 2)
             {
+                if (score > highScore)
+                {
+                    highScore = score;
+
+                    highestScoreLbl.Text = "" + highScore;
+                }
+
                 restartGame();
             }
 
@@ -76,36 +84,6 @@ namespace isometricSnake
             {
                 renderComponent.Render(g);
             }
-
-            //if (getGridID(snake.tail[0].snakeRec.Location)[0] != null)
-            //{
-
-            //    int snakeGridLocation = getGridID(snake.tail[0].snakeRec.Location)[0];
-
-            //    if (snakeGridLocation > getGridID(apples[0].appleShadowRec.Location)[0])
-            //    {
-            //        foreach (Apple apple in apples)
-            //        {
-            //            apple.drawApple(g);
-            //        }
-
-            //        foreach (snakeSegment tailUnit in renderOrder)
-            //        {
-            //            tailUnit.drawSnake(g);
-            //        }
-            //    } else
-            //    {
-            //        foreach (snakeSegment tailUnit in renderOrder)
-            //        {
-            //            tailUnit.drawSnake(g);
-            //        }
-
-            //        foreach (Apple apple in apples)
-            //        {
-            //            apple.drawApple(g);
-            //        }
-            //    }
-            //}
         }
 
         private void refreshScreen_Tick(object sender, EventArgs e)
@@ -144,8 +122,14 @@ namespace isometricSnake
             for (int i = 0; i < renderer.grid.gridSize; i++)
             {
                 for (int x = 0; x < renderer.grid.gridSize; x++)
-                { 
-                    for(int tailNum = 0; tailNum < snake.tail.Count(); tailNum++) // Snake
+                {
+                    if (map[i, x] == apples[0].appleShadowRec.Location) // Apple
+                    {
+                        renderOrder.Add(apples[0].renderShadow);
+                        renderOrder.Add(apples[0].renderApple);
+                    }
+
+                    for (int tailNum = 0; tailNum < snake.tail.Count(); tailNum++) // Snake
                     {
                         snakeSegment tailUnit = snake.tail[tailNum];
 
@@ -153,12 +137,6 @@ namespace isometricSnake
                         {
                             renderOrder.Add(tailUnit.renderer);
                         }
-                    }
-
-                    if(map[i, x] == apples[0].appleShadowRec.Location) // Apple
-                    {
-                        renderOrder.Add(apples[0].renderShadow);
-                        renderOrder.Add(apples[0].renderApple);
                     }
                 }
             }

@@ -12,7 +12,7 @@ namespace isometricSnake
         // Generates the points to place the tiles on
 
         int x_offset = 396;
-        int y_offset = 130;
+        int y_offset = 230;
 
         public int gridSize = 17;
         public int gridSizeZ = 2;
