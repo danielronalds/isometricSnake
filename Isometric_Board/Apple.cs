@@ -12,6 +12,9 @@ namespace isometricSnake
         Size appleSize;
         Point appleLocation;
 
+        public RenderComponent renderApple;
+        public RenderComponent renderShadow;
+
         Rectangle appleRec; // rectangle for the apple sprite
 
         public Rectangle appleShadowRec; // rectange to paint the shadow with, and for collision tracking
@@ -35,6 +38,10 @@ namespace isometricSnake
             appleImage = Properties.Resources.isometric_apple_no_shadow;
 
             appleShadow = Properties.Resources.isometric_apple_shadow;
+
+            renderApple = new RenderComponent(appleImage, appleRec);
+
+            renderShadow = new RenderComponent(appleShadow, appleShadowRec);
         }
 
         public void drawApple(Graphics g)
@@ -59,6 +66,8 @@ namespace isometricSnake
             {
                 animationCurrentCycle = 0;
             }
+
+            renderApple.RenderRect = appleRec;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace isometricSnake
 
         Renderer_v2 renderer = new Renderer_v2();
 
-        List<snakeSegment> renderOrder = new List<snakeSegment>();
+        List<RenderComponent> renderOrder = new List<RenderComponent>();
 
         bool snakeRight, snakeLeft, snakeUp, snakeDown;
 
@@ -70,35 +70,42 @@ namespace isometricSnake
 
             renderer.Render(g);
 
-            if (getGridID(snake.tail[0].snakeRec.Location)[0] != null)
+            apples[0].updateAnimation();
+
+            foreach(RenderComponent renderComponent in renderOrder)
             {
-
-                int snakeGridLocation = getGridID(snake.tail[0].snakeRec.Location)[0];
-
-                if (snakeGridLocation > getGridID(apples[0].appleShadowRec.Location)[0])
-                {
-                    foreach (Apple apple in apples)
-                    {
-                        apple.drawApple(g);
-                    }
-
-                    foreach (snakeSegment tailUnit in renderOrder)
-                    {
-                        tailUnit.drawSnake(g);
-                    }
-                } else
-                {
-                    foreach (snakeSegment tailUnit in renderOrder)
-                    {
-                        tailUnit.drawSnake(g);
-                    }
-
-                    foreach (Apple apple in apples)
-                    {
-                        apple.drawApple(g);
-                    }
-                }
+                renderComponent.Render(g);
             }
+
+            //if (getGridID(snake.tail[0].snakeRec.Location)[0] != null)
+            //{
+
+            //    int snakeGridLocation = getGridID(snake.tail[0].snakeRec.Location)[0];
+
+            //    if (snakeGridLocation > getGridID(apples[0].appleShadowRec.Location)[0])
+            //    {
+            //        foreach (Apple apple in apples)
+            //        {
+            //            apple.drawApple(g);
+            //        }
+
+            //        foreach (snakeSegment tailUnit in renderOrder)
+            //        {
+            //            tailUnit.drawSnake(g);
+            //        }
+            //    } else
+            //    {
+            //        foreach (snakeSegment tailUnit in renderOrder)
+            //        {
+            //            tailUnit.drawSnake(g);
+            //        }
+
+            //        foreach (Apple apple in apples)
+            //        {
+            //            apple.drawApple(g);
+            //        }
+            //    }
+            //}
         }
 
         private void refreshScreen_Tick(object sender, EventArgs e)
@@ -128,7 +135,7 @@ namespace isometricSnake
             snakeDown = false;
         }
 
-        private void sortRenderOrder() // Figures out what order to pain the snake in
+        private void sortRenderOrder() // Figures out what order to draw the elements in
         {
             renderOrder.Clear();
 
@@ -137,27 +144,21 @@ namespace isometricSnake
             for (int i = 0; i < renderer.grid.gridSize; i++)
             {
                 for (int x = 0; x < renderer.grid.gridSize; x++)
-                {
-                    for(int tailNum = 0; tailNum < snake.tail.Count(); tailNum++)
+                { 
+                    for(int tailNum = 0; tailNum < snake.tail.Count(); tailNum++) // Snake
                     {
                         snakeSegment tailUnit = snake.tail[tailNum];
 
                         if(map[i,x] == tailUnit.snakeRec.Location)
                         {
-                            renderOrder.Add(tailUnit);
-
-                        //    if(i == appleLocation[0])
-                        //    {
-                        //        if(x > appleLocation[1])
-                        //        {
-                        //            if(tailNum != 0)
-                        //            {
-                        //                snake.tail[tailNum - 1].paintApple = true;
-                        //                tailUnit.paintApple = false;
-                        //            }
-                        //        }
-                        //    } 
+                            renderOrder.Add(tailUnit.renderer);
                         }
+                    }
+
+                    if(map[i, x] == apples[0].appleShadowRec.Location) // Apple
+                    {
+                        renderOrder.Add(apples[0].renderShadow);
+                        renderOrder.Add(apples[0].renderApple);
                     }
                 }
             }

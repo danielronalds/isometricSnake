@@ -9,6 +9,8 @@ namespace isometricSnake
 {
     class snakeSegment
     {
+        public RenderComponent renderer;
+
         public Point previousPoint;
 
         public Rectangle snakeRec;
@@ -21,6 +23,8 @@ namespace isometricSnake
         {
             snakeRec = new Rectangle(Location, new Size(48,48));
             snakeImage = Properties.Resources.snake_head;
+
+            renderer = new RenderComponent(snakeImage, snakeRec);
         }
 
         public void moveSnake(Point Location)
@@ -28,6 +32,8 @@ namespace isometricSnake
             previousPoint = snakeRec.Location; // Saves the previous location of the tail segment for the tail segment behind it to move to
 
             snakeRec.Location = Location;
+
+            renderer.RenderRect.Location = Location;
         }
 
         public void drawSnake(Graphics g)
