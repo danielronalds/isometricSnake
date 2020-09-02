@@ -70,14 +70,34 @@ namespace isometricSnake
 
             renderer.Render(g);
 
-            foreach (Apple apple in apples)
+            if (getGridID(snake.tail[0].snakeRec.Location)[0] != null)
             {
-                apple.drawApple(g);
-            }
 
-            foreach (snakeSegment tailUnit in renderOrder)
-            {
-                tailUnit.drawSnake(g);
+                int snakeGridLocation = getGridID(snake.tail[0].snakeRec.Location)[0];
+
+                if (snakeGridLocation > getGridID(apples[0].appleShadowRec.Location)[0])
+                {
+                    foreach (Apple apple in apples)
+                    {
+                        apple.drawApple(g);
+                    }
+
+                    foreach (snakeSegment tailUnit in renderOrder)
+                    {
+                        tailUnit.drawSnake(g);
+                    }
+                } else
+                {
+                    foreach (snakeSegment tailUnit in renderOrder)
+                    {
+                        tailUnit.drawSnake(g);
+                    }
+
+                    foreach (Apple apple in apples)
+                    {
+                        apple.drawApple(g);
+                    }
+                }
             }
         }
 
@@ -112,19 +132,52 @@ namespace isometricSnake
         {
             renderOrder.Clear();
 
+            int[] appleLocation = getGridID(apples[0].appleShadowRec.Location);
+
             for (int i = 0; i < renderer.grid.gridSize; i++)
             {
                 for (int x = 0; x < renderer.grid.gridSize; x++)
                 {
-                    foreach(snakeSegment tailUnit in snake.tail)
+                    for(int tailNum = 0; tailNum < snake.tail.Count(); tailNum++)
                     {
+                        snakeSegment tailUnit = snake.tail[tailNum];
+
                         if(map[i,x] == tailUnit.snakeRec.Location)
                         {
                             renderOrder.Add(tailUnit);
+
+                        //    if(i == appleLocation[0])
+                        //    {
+                        //        if(x > appleLocation[1])
+                        //        {
+                        //            if(tailNum != 0)
+                        //            {
+                        //                snake.tail[tailNum - 1].paintApple = true;
+                        //                tailUnit.paintApple = false;
+                        //            }
+                        //        }
+                        //    } 
                         }
                     }
                 }
             }
+        }
+
+        private int[] getGridID(Point Location)
+        {
+            for (int i = 0; i < renderer.grid.gridSize; i++)
+            {
+                for (int x = 0; x < renderer.grid.gridSize; x++)
+                {
+                    if(Location == map[i,x])
+                    {
+                        int[] mapLocation = { i, x };
+                        return mapLocation;
+                    }
+                }
+            }
+
+            return null;
         }
 
         private Point randomLocation() // Generates a random location for the apple to spawn

@@ -15,6 +15,8 @@ namespace isometricSnake
 
         Image snakeImage;
 
+        public bool paintApple = false;
+
         public snakeSegment(Point Location)
         {
             snakeRec = new Rectangle(Location, new Size(48,48));
