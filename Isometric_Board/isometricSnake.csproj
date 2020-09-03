@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Apple.cs" />
+    <Compile Include="TextManager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +120,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\3D Isometric Bold.otf" />
+    <None Include="Resources\FFFFORWA.TTF" />
     <None Include="Resources\isometric_cube.png" />
   </ItemGroup>
   <ItemGroup>

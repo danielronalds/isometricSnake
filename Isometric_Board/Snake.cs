@@ -26,22 +26,22 @@ namespace isometricSnake
 
             tail[0].previousPoint = tail[0].snakeRec.Location; // Saves the previous location of the snakehead for the tail segment behind it to move to
 
-            if (snakeUp) // Moves the snake head in the direction currently "selected"
+            if(snakeUp)//if (snakeLeft) // Moves the snake head in the direction currently "selected"
             {
                 tail[0].snakeRec.X -= 22;
                 tail[0].snakeRec.Y -= 11;
             }
-            if(snakeDown)
+            if(snakeDown)//if(snakeRight)
             {
                 tail[0].snakeRec.X += 22;
                 tail[0].snakeRec.Y += 11;
             }
-            if(snakeLeft)
+            if(snakeLeft)//if(snakeDown)
             {
                 tail[0].snakeRec.X -= 22;
                 tail[0].snakeRec.Y += 11;
             }
-            if(snakeRight)
+            if(snakeRight)//if(snakeUp) alternate control
             {
                 tail[0].snakeRec.X += 22;
                 tail[0].snakeRec.Y -= 11;

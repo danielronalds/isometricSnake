@@ -8,14 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Drawing.Text;
 
 namespace isometricSnake
 {
     public partial class Form1 : Form
     {
+
         Graphics g;
 
         SoundManager sound = new SoundManager();
+
+        TextManager fonts = new TextManager();
 
         Renderer_v2 renderer = new Renderer_v2();
 
@@ -31,7 +35,7 @@ namespace isometricSnake
 
         List<Apple> apples = new List<Apple>();
 
-        int score;
+        int score = 0;
         int highScore = 0;
 
         bool framePassed = false;
@@ -42,14 +46,17 @@ namespace isometricSnake
         {
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, Canvas, new object[] { true });
-            
+
+            fonts.InitializeFonts();
+
             map = renderer.grid.Layers[1];
 
             apples.Add(new Apple(map[8, 5]));
 
             snake = new Snake(map[8,8]);
-        }
 
+            helpButton.Font = fonts.labelFont;
+        }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
@@ -65,8 +72,6 @@ namespace isometricSnake
                 if (score > highScore)
                 {
                     highScore = score;
-
-                    highestScoreLbl.Text = "" + highScore;
                 }
 
                 restartGame();
@@ -84,6 +89,9 @@ namespace isometricSnake
             {
                 renderComponent.Render(g);
             }
+
+            fonts.drawScoreText(g, score, Canvas.Size);
+            fonts.drawHighScoreText(g, highScore, Canvas.Size);
         }
 
         private void refreshScreen_Tick(object sender, EventArgs e)
@@ -102,8 +110,6 @@ namespace isometricSnake
             snake = new Snake(map[8, 8]);
 
             score = 0;
-
-            scoreLbl.Text = "" + score;
 
             framePassed = false;
 
@@ -183,8 +189,6 @@ namespace isometricSnake
                 score++;
                 snake.TailLength++; // Updates score
 
-                scoreLbl.Text = "" + score;
-
                 sound.Pickup_Apple();
 
                 foreach (snakeSegment tailUnit in snake.tail)
@@ -204,6 +208,11 @@ namespace isometricSnake
                 gameState = 2;
             }
 
+        }
+
+        private void helpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Help");
         }
 
         private bool outOfBounds() // Checks to see if the snake is out of the map

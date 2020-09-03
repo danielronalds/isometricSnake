@@ -61,6 +61,26 @@ namespace isometricSnake.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _3D_Isometric_Bold {
+            get {
+                object obj = ResourceManager.GetObject("_3D_Isometric_Bold", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] FFFFORWA {
+            get {
+                object obj = ResourceManager.GetObject("FFFFORWA", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap high_res_isometric_cube_white {

@@ -12,7 +12,6 @@ namespace isometricSnake
         int width, height, x, y;
 
         Image tileImage;
-
         public Rectangle tileRec;
 
         public string tileID;
