@@ -50,7 +50,7 @@
             this.helpButton.AutoSize = true;
             this.helpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.helpButton.Location = new System.Drawing.Point(802, 641);
+            this.helpButton.Location = new System.Drawing.Point(787, 627);
             this.helpButton.Name = "helpButton";
             this.helpButton.Size = new System.Drawing.Size(24, 25);
             this.helpButton.TabIndex = 0;

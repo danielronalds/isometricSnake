@@ -34,7 +34,7 @@ namespace isometricSnake
 
             mainFont = new Font(fonts.Families[0], 42.0F);
             secondaryFont = new Font(fonts.Families[0], 11.0F);
-            labelFont = new Font(fonts.Families[0], 16.0F);
+            labelFont = new Font(fonts.Families[0], 20.0F);
         }
 
         public void drawScoreText(Graphics g, int Score, Size Canvas)

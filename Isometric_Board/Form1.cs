@@ -30,7 +30,7 @@ namespace isometricSnake
         Random random = new Random();
 
         int gameState = 0;
-        
+
         Snake snake;
 
         List<Apple> apples = new List<Apple>();
@@ -191,13 +191,10 @@ namespace isometricSnake
 
                 sound.Pickup_Apple();
 
-                foreach (snakeSegment tailUnit in snake.tail)
-                {
-                    while (apples[0].appleShadowRec.Location == tailUnit.snakeRec.Location) // Makes sure the apple doesnt spawn in the snake
-                    {                                                                       // Using appleShadowRec as it doesnt get moved during the animation
-                        apples.Clear();
-                        apples.Add(new Apple(randomLocation()));
-                    }
+                while (insideSnake(apples[0].appleShadowRec)) // Makes sure the apple doesnt spawn in the snake
+                {                                                                       // Using appleShadowRec as it doesnt get moved during the animation
+                    apples.Clear();
+                    apples.Add(new Apple(randomLocation()));
                 }
 
                 Console.WriteLine("Score: " + score);
@@ -208,6 +205,19 @@ namespace isometricSnake
                 gameState = 2;
             }
 
+        }
+
+        private bool insideSnake(Rectangle appleRec)
+        {
+            foreach(snakeSegment tailUnit in snake.tail)
+            {
+                if(appleRec.Location == tailUnit.snakeRec.Location)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void helpButton_Click(object sender, EventArgs e)
