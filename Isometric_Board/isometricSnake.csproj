@@ -181,5 +181,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borders_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borders_button_off.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

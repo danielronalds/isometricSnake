@@ -11,10 +11,12 @@ namespace isometricSnake
     {
         int width, height, x, y;
 
-        Image tileImage;
+        public Image tileImage;
         public Rectangle tileRec;
 
         public string tileID;
+
+        public bool Bordered = false;
 
         public IsometricTile(Point Position, string ID)
         {
@@ -25,7 +27,7 @@ namespace isometricSnake
 
             tileID = ID;
 
-            tileImage = Properties.Resources.high_res_isometric_cube_white_bordered;
+            tileImage = Properties.Resources.high_res_isometric_cube_white;
 
             tileRec = new Rectangle(x, y, width, height);
         }

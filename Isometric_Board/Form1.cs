@@ -262,6 +262,36 @@ namespace isometricSnake
             }
         }
 
+        private void borderButton_Click(object sender, EventArgs e)
+        {
+            bool borderedButton = false;
+
+            foreach(IsometricTile tile in renderer.tiles)
+            {
+                if(!tile.Bordered)
+                {
+                    tile.tileImage = Properties.Resources.high_res_isometric_cube_white_bordered;
+
+                    tile.Bordered = true;
+                    borderedButton = true;
+
+                } else
+                {
+                    tile.tileImage = Properties.Resources.high_res_isometric_cube_white;
+
+                    tile.Bordered = false;
+                }
+            }
+
+            if(borderedButton)
+            {
+                borderButton.Image = Properties.Resources.borders_button;
+            } else
+            {
+                borderButton.Image = Properties.Resources.borders_button_off;
+            }
+        }
+
         private bool outOfBounds() // Checks to see if the snake is out of the map
         {
             for (int i = 0; i < renderer.grid.gridSize; i++)
