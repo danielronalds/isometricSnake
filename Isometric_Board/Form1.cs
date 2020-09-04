@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
 
 namespace isometricSnake
 {
@@ -40,6 +41,8 @@ namespace isometricSnake
 
         bool framePassed = false;
 
+        bool nameBox = false;
+
         Point[,] map;
 
         public Form1()
@@ -56,6 +59,12 @@ namespace isometricSnake
             snake = new Snake(map[8,8]);
 
             helpButton.Font = fonts.labelFont;
+
+            if(!nameBox)
+            {
+                namePanel.Visible = false;
+                namePanel.Enabled = false;
+            }
         }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
@@ -223,6 +232,34 @@ namespace isometricSnake
         private void helpButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Help");
+        }
+
+        private void nameField_KeyDown(object sender, KeyEventArgs e) // For the criteria
+        {
+            string playerName = nameField.Text;
+
+            if(e.KeyCode == Keys.Enter)
+            {
+                if (!Regex.IsMatch(playerName, @"^[a-zA-Z]+$"))//checks playerName for letters
+                {
+                    MessageBox.Show("Please enter a name using letters only!");
+                    nameField.Clear();
+
+                    nameField.Focus();
+                }
+                else
+                {
+                    namePanel.Visible = false;
+                    namePanel.Enabled = false;
+                }
+            }
+        }
+
+        private void nameField_TextChanged(object sender, EventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(nameField.Text, "^[a-zA-Z ]"))
+            {
+            }
         }
 
         private bool outOfBounds() // Checks to see if the snake is out of the map

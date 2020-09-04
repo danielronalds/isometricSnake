@@ -32,12 +32,16 @@
             this.Canvas = new System.Windows.Forms.Panel();
             this.helpButton = new System.Windows.Forms.Label();
             this.refreshScreen = new System.Windows.Forms.Timer(this.components);
+            this.namePanel = new System.Windows.Forms.Panel();
+            this.nameField = new System.Windows.Forms.TextBox();
             this.Canvas.SuspendLayout();
+            this.namePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // Canvas
             // 
             this.Canvas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
+            this.Canvas.Controls.Add(this.namePanel);
             this.Canvas.Controls.Add(this.helpButton);
             this.Canvas.Location = new System.Drawing.Point(0, 0);
             this.Canvas.Name = "Canvas";
@@ -63,6 +67,25 @@
             this.refreshScreen.Interval = 70;
             this.refreshScreen.Tick += new System.EventHandler(this.refreshScreen_Tick);
             // 
+            // namePanel
+            // 
+            this.namePanel.BackColor = System.Drawing.Color.White;
+            this.namePanel.Controls.Add(this.nameField);
+            this.namePanel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.namePanel.Location = new System.Drawing.Point(327, 321);
+            this.namePanel.Name = "namePanel";
+            this.namePanel.Size = new System.Drawing.Size(187, 49);
+            this.namePanel.TabIndex = 1;
+            // 
+            // nameField
+            // 
+            this.nameField.Location = new System.Drawing.Point(15, 14);
+            this.nameField.Name = "nameField";
+            this.nameField.Size = new System.Drawing.Size(156, 20);
+            this.nameField.TabIndex = 0;
+            this.nameField.TextChanged += new System.EventHandler(this.nameField_TextChanged);
+            this.nameField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nameField_KeyDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -75,6 +98,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.Canvas.ResumeLayout(false);
             this.Canvas.PerformLayout();
+            this.namePanel.ResumeLayout(false);
+            this.namePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -84,6 +109,8 @@
         private System.Windows.Forms.Panel Canvas;
         private System.Windows.Forms.Timer refreshScreen;
         private System.Windows.Forms.Label helpButton;
+        private System.Windows.Forms.Panel namePanel;
+        private System.Windows.Forms.TextBox nameField;
     }
 }
 

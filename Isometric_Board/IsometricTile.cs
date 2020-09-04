@@ -25,7 +25,7 @@ namespace isometricSnake
 
             tileID = ID;
 
-            tileImage = Properties.Resources.high_res_isometric_cube_white;
+            tileImage = Properties.Resources.high_res_isometric_cube_white_bordered;
 
             tileRec = new Rectangle(x, y, width, height);
         }
