@@ -42,6 +42,7 @@ namespace isometricSnake
         bool framePassed = false;
 
         bool nameBox = false;
+        string playerName;
 
         Point[,] map;
 
@@ -75,6 +76,10 @@ namespace isometricSnake
 
             if(gameState == 1)
             {
+                // Hides help button and border button
+                helpButton.Visible = false;
+                borderButton.Visible = false;
+
                 snake.moveSnake(snakeUp, snakeDown, snakeLeft, snakeRight);
             } else if(gameState == 2)
             {
@@ -84,6 +89,11 @@ namespace isometricSnake
                 }
 
                 restartGame();
+            } else
+            {
+                // Shows help button and border button
+                helpButton.Visible = true;
+                borderButton.Visible = true;
             }
 
             sortRenderOrder();
@@ -229,18 +239,34 @@ namespace isometricSnake
             return false;
         }
 
-        private void helpButton_Click(object sender, EventArgs e)
+        private void helpButton_Click(object sender, EventArgs e) // Game instructions
         {
-            MessageBox.Show("Help");
+            string Title = "Game Instructions";
+
+            string Message = "The objective of the game is to get as many points as you can by eating apples that are randomly generated on the map. For each apple you eat, your tail grows by one.\n\n" +
+                "The game ends if you either go off the map, or hit your own tail" +
+                "\n\nControls:" +
+                "\nW/Up Arrow: Changes the direction of the snake so that it is moving towards the top of the screen" +
+                "\nS/Down Arrow: Changes the direction of the snake so that it is moving towards the bottom of the screen" +
+                "\nD/Left Arrow: Changes the direction of the snake so that it is moving towards the left of the screen" +
+                "\nA/Right Arrow: Changes the direction of the snake so that it is moving towards the right of the screen" +
+                "\n\nNOTE: If the snake is moving up, it can not go down, and vice versa. This also applies to left and right movement. This is so the player cannot die by accident";
+
+            if(playerName != null)
+            {
+                Message = "Hi " + playerName + "!\n\n" + Message;
+            }
+
+            MessageBox.Show(Message, Title, MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
 
         private void nameField_KeyDown(object sender, KeyEventArgs e) // For the criteria
         {
-            string playerName = nameField.Text;
+            string name = nameField.Text;
 
             if(e.KeyCode == Keys.Enter)
             {
-                if (!Regex.IsMatch(playerName, @"^[a-zA-Z]+$"))//checks playerName for letters
+                if (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))//checks name for letters
                 {
                     MessageBox.Show("Please enter a name using letters only!");
                     nameField.Clear();
@@ -249,20 +275,16 @@ namespace isometricSnake
                 }
                 else
                 {
+                    playerName = name; // saves player Name
+
                     namePanel.Visible = false;
                     namePanel.Enabled = false;
+
                 }
             }
         }
 
-        private void nameField_TextChanged(object sender, EventArgs e)
-        {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(nameField.Text, "^[a-zA-Z ]"))
-            {
-            }
-        }
-
-        private void borderButton_Click(object sender, EventArgs e)
+        private void borderButton_Click(object sender, EventArgs e) // Allows the player to turn borders on and off
         {
             bool borderedButton = false;
 
