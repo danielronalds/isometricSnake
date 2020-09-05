@@ -51,6 +51,8 @@ namespace isometricSnake
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, Canvas, new object[] { true });
 
+            this.Icon = Properties.Resources.IsometricSnakeIcon; // Sets Icon
+
             fonts.InitializeFonts();
 
             map = renderer.grid.Layers[1];
@@ -244,7 +246,7 @@ namespace isometricSnake
             string Title = "Game Instructions";
 
             string Message = "The objective of the game is to get as many points as you can by eating apples that are randomly generated on the map. For each apple you eat, your tail grows by one.\n\n" +
-                "The game ends if you either go off the map, or hit your own tail" +
+                "The game ends if you either go off the map, or hit your own tail. To start simply pick the direction you wish to go." +
                 "\n\nControls:" +
                 "\nW/Up Arrow: Changes the direction of the snake so that it is moving towards the top of the screen" +
                 "\nS/Down Arrow: Changes the direction of the snake so that it is moving towards the bottom of the screen" +

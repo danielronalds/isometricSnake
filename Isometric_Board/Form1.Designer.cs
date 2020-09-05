@@ -104,6 +104,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 689);
             this.Controls.Add(this.Canvas);
+            this.MaximumSize = new System.Drawing.Size(854, 728);
+            this.MinimumSize = new System.Drawing.Size(854, 728);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Isometric Snake";
