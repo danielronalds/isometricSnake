@@ -1,2 +1,2 @@
-# isometricSnake
-Isometric snake game experiment
+# Isometric Snake
+A simple snake game with an isometric view.
